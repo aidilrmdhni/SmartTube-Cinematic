@@ -359,6 +359,7 @@ public class MainUIData extends DataChangeBase implements ProfileChangeListener 
     }
 
     public boolean isUiTweakEnabled(long uiTweaks) {
+        if (uiTweaks == UI_TWEAK_ROUNDED_CORNERS) { return true; }
         return (mUiTweaks & uiTweaks) == uiTweaks;
     }
 

@@ -596,28 +596,7 @@ public class BaseCardView extends FrameLayout {
 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
-        // filter out focus states,  since leanback does not fade foreground on focus.
-        final int[] s = super.onCreateDrawableState(extraSpace);
-        final int N = s.length;
-        boolean pressed = false;
-        boolean enabled = false;
-        for (int i = 0; i < N; i++) {
-            if (s[i] == android.R.attr.state_pressed) {
-                pressed = true;
-            }
-            if (s[i] == android.R.attr.state_enabled) {
-                enabled = true;
-            }
-        }
-        if (pressed && enabled) {
-            return View.PRESSED_ENABLED_STATE_SET;
-        } else if (pressed) {
-            return LB_PRESSED_STATE_SET;
-        } else if (enabled) {
-            return View.ENABLED_STATE_SET;
-        } else {
-            return View.EMPTY_STATE_SET;
-        }
+        return super.onCreateDrawableState(extraSpace);
     }
 
     private void applyActiveState(boolean active) {

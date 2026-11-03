@@ -70,9 +70,14 @@ public class VideoCardPresenter extends LongClickPresenter {
 
         updateDimensions(context);
 
+        final Drawable outlineDrawable = ContextCompat.getDrawable(context, R.drawable.lb_card_outline);
+
         ComplexImageCardView cardView = new ComplexImageCardView(context) {
             @Override
             public void setSelected(boolean selected) {
+                if (VERSION.SDK_INT >= 21) {
+                    setForeground(selected ? outlineDrawable : null);
+                }
                 updateCardBackgroundColor(this, selected);
                 super.setSelected(selected);
             }
@@ -89,7 +94,7 @@ public class VideoCardPresenter extends LongClickPresenter {
         cardView.enableContent(isContentEnabled());
         cardView.setBackgroundColor(mDefaultBackgroundColor); // background is temporarily visible during animations
         if (VERSION.SDK_INT >= 21) {
-            cardView.setForeground(ContextCompat.getDrawable(context, R.drawable.lb_card_outline));
+            cardView.setClipToOutline(true);
         }
         updateCardBackgroundColor(cardView, false);
         return new ViewHolder(cardView);

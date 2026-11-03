@@ -80,9 +80,9 @@
     -->
     <dimen name="lb_rounded_rect_corner_radius">16dp</dimen>
 
-    <!-- Cinema-First card zoom factor (1.06x) -->
-    <item name="lb_focus_zoom_factor_small" type="fraction">106%</item>
-    <item name="lb_focus_zoom_factor_xsmall" type="fraction">106%</item>
+    <!-- Cinema-First card zoom factor (1.12x Apple TV Pop-out) -->
+    <item name="lb_focus_zoom_factor_small" type="fraction">112%</item>
+    <item name="lb_focus_zoom_factor_xsmall" type="fraction">112%</item>
 
     <!-- MOD: Zoom factor of focused button (SearchOrbView, default: 120%) -->
     <!--<item name="lb_search_orb_focused_zoom" type="fraction">120%</item>-->
