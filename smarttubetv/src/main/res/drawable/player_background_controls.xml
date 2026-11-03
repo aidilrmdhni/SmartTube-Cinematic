@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Apple TV / Netflix Cinema Scrim: Smooth bottom-to-top dark obsidian gradient -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:angle="90"
+                android:centerY="0.38"
+                android:startColor="#F205070B"
+                android:centerColor="#9905070B"
+                android:endColor="#00000000"
+                android:type="linear" />
+        </shape>
+    </item>
+</selector>
