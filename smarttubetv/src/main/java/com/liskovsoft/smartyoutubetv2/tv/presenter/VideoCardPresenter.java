@@ -76,7 +76,12 @@ public class VideoCardPresenter extends LongClickPresenter {
             @Override
             public void setSelected(boolean selected) {
                 if (VERSION.SDK_INT >= 21) {
-                    setForeground(selected ? outlineDrawable : null);
+                    View preview = findViewById(R.id.layout_preview_card);
+                    if (preview != null) {
+                        preview.setForeground(selected ? outlineDrawable : null);
+                    } else {
+                        setForeground(selected ? outlineDrawable : null);
+                    }
                 }
                 updateCardBackgroundColor(this, selected);
                 super.setSelected(selected);
@@ -92,9 +97,19 @@ public class VideoCardPresenter extends LongClickPresenter {
         cardView.enableBadge(isBadgeEnabled());
         cardView.enableTitle(isTitleEnabled());
         cardView.enableContent(isContentEnabled());
-        cardView.setBackgroundColor(mDefaultBackgroundColor); // background is temporarily visible during animations
+        cardView.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         if (VERSION.SDK_INT >= 21) {
-            cardView.setClipToOutline(true);
+            View preview = cardView.findViewById(R.id.layout_preview_card);
+            if (preview != null) {
+                int radius = context.getResources().getDimensionPixelSize(R.dimen.lb_rounded_rect_corner_radius);
+                preview.setOutlineProvider(new android.view.ViewOutlineProvider() {
+                    @Override
+                    public void getOutline(View view, android.graphics.Outline outline) {
+                        outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), radius);
+                    }
+                });
+                preview.setClipToOutline(true);
+            }
         }
         updateCardBackgroundColor(cardView, false);
         return new ViewHolder(cardView);
@@ -110,7 +125,7 @@ public class VideoCardPresenter extends LongClickPresenter {
 
         View infoField = view.findViewById(R.id.info_field);
         if (infoField != null) {
-            infoField.setBackgroundColor(backgroundColor);
+            infoField.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         }
 
         TextView titleText = view.findViewById(R.id.title_text);

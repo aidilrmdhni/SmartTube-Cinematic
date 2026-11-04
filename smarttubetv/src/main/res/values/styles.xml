@@ -250,4 +250,17 @@
         <item name="cardSelectedBackground">@color/card_selected_background_white_grey</item>
     </style>
     <!--  End Color scheme: Dark Blue (OLED)  -->
+
+    <!-- Apple TV / Netflix Clean Modern Card Typography -->
+    <style name="TextAppearance.Leanback.ImageCardView.Title">
+        <item name="android:textSize">@dimen/lb_basic_card_title_text_size</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.Leanback.ImageCardView.Content">
+        <item name="android:textSize">@dimen/lb_basic_card_content_text_size</item>
+        <item name="android:textColor">#8A92A6</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
 </resources>

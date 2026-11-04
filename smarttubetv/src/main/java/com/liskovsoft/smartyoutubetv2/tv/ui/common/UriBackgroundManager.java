@@ -60,7 +60,12 @@ public class UriBackgroundManager {
     }
 
     public void setBackgroundFrom(Video item) {
-        // Selectively change background picture
+        if (item != null) {
+            String url = item.getBackgroundUrl() != null ? item.getBackgroundUrl() : item.getCardImageUrl();
+            if (url != null) {
+                startBackgroundTimer(url);
+            }
+        }
     }
 
     public void onStart() {
@@ -136,7 +141,22 @@ public class UriBackgroundManager {
                     public void onResourceReady(
                             @NonNull Bitmap resource,
                             Transition<? super Bitmap> transition) {
-                        mBackgroundManager.setBitmap(resource);
+                        try {
+                            Bitmap darkBackdrop = resource.copy(Bitmap.Config.ARGB_8888, true);
+                            android.graphics.Canvas canvas = new android.graphics.Canvas(darkBackdrop);
+                            android.graphics.Paint paint = new android.graphics.Paint();
+                            android.graphics.LinearGradient gradient = new android.graphics.LinearGradient(
+                                    0, 0, 0, darkBackdrop.getHeight(),
+                                    new int[] { 0x5505070B, 0xB005070B, 0xFD05070B },
+                                    new float[] { 0.0f, 0.40f, 1.0f },
+                                    android.graphics.Shader.TileMode.CLAMP
+                            );
+                            paint.setShader(gradient);
+                            canvas.drawRect(0, 0, darkBackdrop.getWidth(), darkBackdrop.getHeight(), paint);
+                            mBackgroundManager.setBitmap(darkBackdrop);
+                        } catch (Throwable e) {
+                            mBackgroundManager.setBitmap(resource);
+                        }
                     }
                 });
     }
